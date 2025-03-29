@@ -1,0 +1,55 @@
+SI No.,Course_Code,Course_Title,"Credits
+(L-T-P-S-C)",Pre-requisite,Faculty,TA,Lab assistance/ TA,Classroom,Segment - I,Segment - II,Segment - III,Segment - IV,
+1,,Statistics,3-1-0-0-2,,Dr. Ramesh Athe,,Will be scheduled Post MidSem,C004,,,TRUE,TRUE,
+2,,Introduction to DS & AI,3-1-0-0-2,,Dr. Siddharth R,,Will be scheduled Post MidSem,C004,,,TRUE,TRUE,
+3.1,,Introduction to cybersecurity,3-1-0-0-2,,Dr. Srinivas Kulkarni,"Gautami Sanjay Naik, Chandrika Bhosge",,C202,TRUE,TRUE,TRUE,TRUE,
+3.2,,Introduction to Quntum Physics,3-1-0-0-2,,Prof. Ravishankar,Chandrika Bhosge,,C203,TRUE,TRUE,TRUE,TRUE,
+3.3,,Introduction to Personal Finance,3-1-0-0-2,,Dr. Siddharth R,,,C205,TRUE,TRUE,TRUE,TRUE,
+3.4,,Introduction to Design,0-0-2-2-1,,Dr. Sandesh,,,C205,FALSE,FALSE,TRUE,TRUE,
+4,,Probability,3-1-0-0-2,,Dr. Lakshman,"Priyanka Jakali, Shrirang Pujari",,C004,TRUE,TRUE,,,
+5,,Digital Design,3-0-2-0-2,,Dr. Somen,"1. Vinod
+2. Shraddha","1. Mr. Vinod Konnur 
+2. Anil M Kabbur 
+3. Ms. Shraddha 
+4. Basavaraj Choukimath",C004,TRUE,TRUE,,,
+6,,Problem Solving through Programming,3-0-2-0-4,,Dr. Manjunath KV,,"1. Ms. Vani
+2. Ms. Meghana",C204,TRUE,TRUE,TRUE,TRUE,
+7.1,,HSS/I&E- Economics,3-0-0-0-3,,Dr. Anushree Kini,,Gautami Sanjay Naik,C205,TRUE,TRUE,TRUE,TRUE,
+7.2,,Innovation and Enterpreneurship,3-0-0-0-3,,Dr. Deepak K T,,Elective for ECE and DSAI,C205,TRUE,TRUE,TRUE,TRUE,
+,,Total,17,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+,Course Code,Course Title,"Credits
+(L-T-P-S-C)",Pre-requisite,Faculty,TA,Lab assistance/ TA,Classroom,Segment - I,Segment - II,Segment - III,Segment - IV,Segment - IV
+1,MA163,Linear Algebra,3-1-0-0-2,,Dr. Sibasankar Padhy,,,,TRUE,TRUE,FALSE,FALSE,FALSE
+2,CS162,Optimization,3-1-0-0-2,,Dr. Dibyajyoti Guha,,"1. Shri Ranga Pujari
+2. Ashwini Chikkenakoppa",C004,FALSE,FALSE,TRUE,TRUE,TRUE
+3,CS164,Computer Architecture,3-0-2-0-2,,Dr. Manjunath,,"1. Vinod
+2. Basavaraj Choukimath",C204,FALSE,FALSE,TRUE,TRUE,TRUE
+4,HS161,English Language and Communication,3-0-0-0-3,,Dr. Rajesh N S,,,C204,TRUE,TRUE,TRUE,TRUE,TRUE
+5,CS163,Data Structures and Algorithms,3-0-2-0-4,,Dr. Sunil Saumya,,"1. Mr. Vinod Konnur 
+2. Anil M Kabbur 
+3. Ms. Shraddha 
+4. Basavaraj Choukimath",C204,TRUE,TRUE,TRUE,TRUE,TRUE
+6,DS164,Data Curation Techniques,2-0-2-0-3,,Dr. Siddharth R.,,"1. Ms. Vani
+2. Ms. Meghana",C002,TRUE,TRUE,TRUE,TRUE,TRUE
+7,Open Elective-II,,,,,,,,,,,,
+B3,New,Data Science with Python,2,,Dr. Abdul Wahid,,,C002,FALSE,FALSE,TRUE,TRUE,TRUE
+,New,Introduction to Digital VLSI Design,2,,Dr Prakash Pawar,,,C203,FALSE,FALSE,TRUE,TRUE,TRUE
+,New,Industry Insights Program Part 1,1,,Mr. Ram Subramanian & Mr. Sasi Kumar Sundara Rajan,,,,TRUE,TRUE,TRUE,TRUE,TRUE
+,New,Principles of Quantum Physics,2,,Dr. Ashwath Babu & Prof. Ravi Shankar,,,,FALSE,FALSE,FALSE,FALSE,FALSE
+B4,New,Linux for Engineers,2,,Dr. Shirshendu Layek,,,C203,FALSE,FALSE,TRUE,TRUE,TRUE
+,New,Photography101,1,,Dr Prabhu Prasad BM,,,C204,FALSE,FALSE,TRUE,TRUE,TRUE
+,New,Introduction to Holistic Personality Development,1,,Prof. Chachadi and Dr. Chandrika K,,,-,FALSE,FALSE,TRUE,TRUE,TRUE
+,New,Visual Design – Principles and Application in Product Communication,2,,Dr. Sandesh P,,,C304,FALSE,FALSE,TRUE,TRUE,TRUE
+,ASD151,Introduction to Design,1,,Dr. Sandesh P,,,completed,TRUE,TRUE,FALSE,FALSE,FALSE
+,HS151,Introduction to Personal Finance,2,,Dr. Siddharth,,,,TRUE,TRUE,FALSE,FALSE,FALSE
+,New,Introduction to Internet of Things,2,,Dr Jagadeesha Bhat,,,,TRUE,TRUE,FALSE,FALSE,FALSE
+,New,Computer Intensive Statistical Methods,2,,Dr Ramesh Athe,,,,FALSE,TRUE,FALSE,FALSE,FALSE
+,New,Concurrency and Computation,2,,Dr Pramod Y,,,,TRUE,TRUE,FALSE,FALSE,FALSE
