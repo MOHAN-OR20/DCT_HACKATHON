@@ -1,0 +1,160 @@
+import pandas as pd
+import random
+from collections import defaultdict
+
+def load_and_clean_data(file_path):
+    """Load and clean the Excel data"""
+    try:
+        # Load the Excel file
+        df = pd.read_excel("C:\\Users\\durga\\OneDrive\\ドキュメント\\data curation techniques\\Untitled spreadsheet - Sheet1(1).xlsx")
+
+        # Debug: Print actual columns to verify structure
+        print("\nColumns found in Excel file:")
+        print(f"Total columns: {len(df.columns)}")
+        print(df.columns.tolist())
+
+        # Drop rows where Course Title is missing
+        course_title_col = df.columns[2]  # Course Title is in column 2
+        df = df.dropna(subset=[course_title_col])
+
+        # Extract credit components (L-T-P-S-C)
+        credits_col = df.columns[3]
+        credit_components = df[credits_col].str.extract(r"(\d+)-(\d+)-(\d+)-(\d+)-(\d+)")
+        df[["L", "T", "P", "S", "C"]] = credit_components.astype(float)
+
+        # Rename key columns based on actual structure
+        column_mapping = {
+            df.columns[2]: "Course_Title",
+            df.columns[3]: "Credits",
+            df.columns[5]: "Faculty",
+            df.columns[9]: "Segment_I",
+            df.columns[10]: "Segment_II",
+            df.columns[11]: "Segment_III",
+            df.columns[12]: "Segment_IV",
+            df.columns[13]: "Semester No:",
+            df.columns[14]: "Branch name:",
+            df.columns[15]: "Section"
+        }
+        df = df.rename(columns=column_mapping)
+
+        # Clean and convert semester column
+        df["Sem"] = pd.to_numeric(df["Sem"], errors='coerce').fillna(0).astype(int)
+
+        # Keep only valid semesters (1 or 2)
+        df = df[df["Sem"].isin([1, 2])]
+
+        # Convert segment columns to boolean (True/False)
+        for seg_col in ["Segment_I", "Segment_II", "Segment_III", "Segment_IV"]:
+            df[seg_col] = df[seg_col].notna()
+
+        return df
+
+    except Exception as e:
+        print(f"\nError loading data: {e}")
+        return None
+
+def initialize_timetable_structure():
+    """Initialize the timetable structure for both semesters"""
+    available_slots = [
+        "09:00-10:30", "10:45-12:15", "12:15-1:15","01:15-02:30", "02:45-04:15", "04:30-05:00","5:00-6:30"
+    ]
+
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+    # Structure for both semesters
+    semesters = {
+        1: {
+            "Segment_1_2": ["Segment_I", "Segment_II"],
+            "Segment_3_4": ["Segment_III", "Segment_IV"],
+            "Semester_no":["Semester No"]
+        },
+        2: {
+            "Segment_1_2": ["Segment_I", "Segment_II"],
+            "Segment_3_4": ["Segment_III", "Segment_IV"],
+            "Semester_no":["Semester No"]
+        }
+    }
+
+    # Initialize empty timetables
+    timetables = {
+        sem: {
+            seg: {
+                slot: {day: None for day in days}
+                for slot in available_slots
+            }
+            for seg in segments
+        }
+        for sem, segments in semesters.items()
+    }
+
+    return timetables, available_slots, days, semesters
+
+def schedule_courses(df, timetables, available_slots, days, semesters):
+    """Schedule courses into the timetable for each semester"""
+    if df is None:
+        return None, None
+
+    for sem_num, segments in semesters.items():
+        semester_courses = df[df["Semester No:"] == sem_num]
+        
+        if semester_courses.empty:
+            continue
+
+        for combined_segment, segment_list in segments.items():
+            segment_mask = semester_courses[segment_list].any(axis=1)
+            segment_courses = semester_courses[segment_mask]
+
+            if segment_courses.empty:
+                continue
+
+            # Categorize courses by credit type
+            four_credit = segment_courses[segment_courses["C"] == 4]
+            three_credit = segment_courses[segment_courses["C"] == 3]
+            two_credit = segment_courses[segment_courses["C"] == 2]
+
+            for _, row in four_credit.iterrows():
+                schedule_course_sessions(row, timetables, sem_num, combined_segment, available_slots, days, 2)
+            
+            for _, row in three_credit.iterrows():
+                schedule_course_sessions(row, timetables, sem_num, combined_segment, available_slots, days, 2)
+            
+            for _, row in two_credit.iterrows():
+                schedule_course_sessions(row, timetables, sem_num, combined_segment, available_slots, days, 1)
+
+    return timetables
+
+def schedule_course_sessions(course_row, timetables, sem_num, segment, available_slots, days, sessions_needed):
+    scheduled = 0
+    random_slots = random.sample(available_slots, len(available_slots))
+    random_days = random.sample(days, len(days))
+
+    for slot in random_slots:
+        for day in random_days:
+            if scheduled >= sessions_needed:
+                return
+
+            if timetables[sem_num][segment][slot][day] is None:
+                timetables[sem_num][segment][slot][day] = course_row["Course_Title"]
+                scheduled += 1
+
+def print_timetable(timetables):
+    for sem_num in sorted(timetables.keys()):
+        print(f"\n{'='*60}")
+        print(f"{' '*20}SEMESTER {sem_num} TIMETABLE")
+        print(f"{'='*60}")
+
+        for segment in timetables[sem_num]:
+            print(f"\n{segment.replace('_', ' ')}:")
+            print(f"{'-'*60}")
+            
+            timetable_data = []
+            for day in days:
+                day_row = {"Day": day}
+                for slot in timetables[sem_num][segment]:
+                    day_row[slot] = timetables[sem_num][segment][slot][day] or "Free"
+                timetable_data.append(day_row)
+            
+            timetable_df = pd.DataFrame(timetable_data)
+            timetable_df = timetable_df.set_index("Day")
+            print(timetable_df.to_string())
+            print(f"{'-'*60}")
